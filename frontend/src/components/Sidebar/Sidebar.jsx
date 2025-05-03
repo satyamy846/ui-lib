@@ -10,6 +10,7 @@ import {
   ChevronRight, 
   ChevronDown 
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, setIsOpen, isMobile, setIsMobile}) => {
   const [expandedMenus, setExpandedMenus] = useState({});
@@ -47,39 +48,24 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile, setIsMobile}) => {
   // Menu items with nested structure
   const menuItems = [
     {
-      title: 'Dashboard',
-      icon: <Home size={20} />,
-      link: '#'
-    },
-    {
-      title: 'Users',
+      title: 'Components',
       icon: <Users size={20} />,
       link: '#',
       subMenu: [
-        { title: 'User List', link: '#' },
-        { title: 'Add User', link: '#' },
-        { title: 'User Groups', link: '#' }
+        { title: 'Button', link: '/button' },
+        { title: 'Lists', link: '/list' },
+        { title: 'Radio', link: '#' }
       ]
     },
     {
-      title: 'Reports',
+      title: 'Templates',
       icon: <FileText size={20} />,
       link: '#',
       subMenu: [
-        { title: 'Monthly', link: '#' },
-        { title: 'Quarterly', link: '#' },
-        { title: 'Annual', link: '#' }
+        { title: 'Template1', link: '#' },
+        { title: 'Template2', link: '#' },
+        { title: 'Template3', link: '#' }
       ]
-    },
-    {
-      title: 'Settings',
-      icon: <Settings size={20} />,
-      link: '#'
-    },
-    {
-      title: 'Help',
-      icon: <HelpCircle size={20} />,
-      link: '#'
     }
   ];
 
@@ -132,12 +118,12 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile, setIsMobile}) => {
                     <ul className="bg-gray-900 py-2">
                       {item.subMenu.map((subItem, subIndex) => (
                         <li key={subIndex}>
-                          <a 
-                            href={subItem.link}
+                          <Link 
+                            to={subItem.link}
                             className="flex items-center pl-12 py-2 hover:bg-gray-700"
                           >
                             {subItem.title}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>

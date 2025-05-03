@@ -7,10 +7,10 @@ import { oneDark } from '@codemirror/theme-one-dark'; // Import the One Dark the
 import { apiEndPoints } from '../constants/Common';
 import CodePreviewToggle from './CodePreviewToggle';
 
-const CodeEditor = ({ renderPreview, fileName }) => {
+const CodeEditor = ({ renderPreview, fileName, folderName }) => {
     const editorRef = useRef(null);
     const [activeTab, setActiveTab] = useState('code');
-    const { code, loading, error, setCode } = useFetchCode(apiEndPoints.getCode + "?filename=" + fileName + "&foldername=Buttons");
+    const { code, loading, error, setCode } = useFetchCode(apiEndPoints.getCode + "?filename=" + fileName + `&foldername=${folderName}`);
     // const [data, setData] = useState(null);
     console.log("coode --- ", code)
 

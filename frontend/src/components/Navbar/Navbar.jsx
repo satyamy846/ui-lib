@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
   <rect width="160" height="50" rx="10" fill="#0F172A"/>
   <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle"
         fontFamily="Segoe UI, sans-serif" fontSize="20" fontWeight="bold" fill="#F8FAFC">
-    CopyUI
+   Logo
   </text>
 </svg>
 
@@ -27,8 +28,8 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Home</a>
-              <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">About</a>
+              <Link to="/" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Home</Link>
+              <Link to="/setup" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Setup Guide</Link>
               <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Services</a>
               <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Blog</a>
               <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Contact</a>
@@ -50,8 +51,8 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Home</a>
-              <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">About</a>
+              <Link href="/" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Home</Link>
+              <Link to="/setup" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Setup Guide</Link>
               <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Services</a>
               <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Blog</a>
               <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Contact</a>
