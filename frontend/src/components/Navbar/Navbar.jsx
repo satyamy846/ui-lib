@@ -1,66 +1,66 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Search, Moon, Sun, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import useTheme from '../../hooks/useTheme';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="bg-gray-800 text-white">
-      <div className='px-4'>
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 font-bold text-xl">
-          <svg width="160" height="50" viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="160" height="50" rx="10" fill="#0F172A"/>
-  <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle"
-        fontFamily="Segoe UI, sans-serif" fontSize="20" fontWeight="bold" fill="#F8FAFC">
-   Logo
-  </text>
-</svg>
-
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
-              <Link to="/" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Home</Link>
-              <Link to="/setup" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Setup Guide</Link>
-              <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Services</a>
-              <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Blog</a>
-              <a href="#" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Contact</a>
+    <header className={`sticky top-0 z-10 shadow-md ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <button
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <Menu size={20} />
+          </button>
+          <div className="text-xl font-bold flex items-center">
+            <div className={`h-8 w-8 rounded-md mr-2 ${theme === 'dark' ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center`}>
+              <span className="text-white font-bold">UI</span>
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button 
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-700 focus:outline-none"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            ComponentStack
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link href="/" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Home</Link>
-              <Link to="/setup" className="px-3 py-2 rounded-lg hover:bg-gray-700 font-medium">Setup Guide</Link>
-              <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Services</a>
-              <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Blog</a>
-              <a href="#" className="block px-3 py-2 rounded-md hover:bg-gray-700 font-medium">Contact</a>
-            </div>
+        <div className="hidden md:flex flex-1 max-w-md mx-8">
+          <div className={`flex items-center w-full rounded-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} px-3 py-2`}>
+            <Search size={18} className="text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search components..."
+              className={`ml-2 bg-transparent border-none focus:outline-none w-full ${theme === 'dark' ? 'placeholder-gray-400' : 'placeholder-gray-500'}`}
+            />
           </div>
-        )}
-</div>
-    </nav>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <button
+            className={`p-2 rounded-md cursor-pointer ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <a href="#" className="flex items-center">
+            <Github size={20} className="mr-1" />
+            <span className="hidden md:inline">GitHub</span>
+          </a>
+          <a
+            href="#"
+            className={`hidden md:inline-flex items-center px-4 py-2 rounded-md text-white ${theme === 'dark' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-purple-500 hover:bg-purple-600'}`}
+          >
+            Get Started
+          </a>
+        </div>
+      </div>
+    </header>
   );
 };
 

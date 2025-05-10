@@ -12,9 +12,10 @@ const AppRoutes = () => {
         <Route path="button" element={<ButtonPage />} />
         <Route path="list" element={<ListPage />} />
         <Route path="setup" element={<Setup />} />
+        <Route path="*" element={<h1 className='text-center'>Component Not Present Yet</h1>} />
       </Route>
     </Routes>
   )
 }
 
-export default AppRoutes
+export default AppRoutes;

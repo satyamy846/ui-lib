@@ -3,41 +3,46 @@ import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
 import CodeEditor from './utils/CodeEditor';
 import Button from './components/Buttons/Button';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import ParentViewEditor from './utils/ParentViewEditor';
+import Footer from './Footer';
+import useTheme from './hooks/useTheme';
 
 const Home = () => {
-      const [isMobile, setIsMobile] = useState(false);
-        const [isOpen, setIsOpen] = useState(true);
-      useEffect(() =>{
-       async function handleFetch(){
-        const result = await fetch("http://localhost:8080/api/v1/healthz");
-        const res = await result.json();
-        console.log(res)
-       }
-       handleFetch();
-      }, [])
-    
+  const [isMobile, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const { theme, toggleTheme } = useTheme();
+  // const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    async function handleFetch() {
+      const result = await fetch("http://localhost:8080/api/v1/healthz");
+      const res = await result.json();
+      console.log(res)
+    }
+    handleFetch();
+  }, [])
+  const loc = useLocation();
+  const location = loc.pathname;
   return (
     <>
-    <div className='container'>
-    <Navbar/>
-        <div className="flex h-screen">
-        <Sidebar  isOpen={isOpen} setIsOpen={setIsOpen} isMobile={isMobile} setIsMobile={setIsMobile}/>
-       {/* Content Area */}
-      <div className={`flex-1 transition-all duration-300 ${isMobile && isOpen ? 'opacity-50' : 'opacity-100'}`}>
-        {/* <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">Main Content Area</h1>
-          <p>This is where your main content would go. The sidebar can be collapsed or expanded.</p>
-          <CodeEditor renderPreview={<Button />} fileName="Button" />
-        </div> */}
-        {/* <ParentViewEditor renderPreview={<Button />}/> */}
-        <Outlet/>
-      </div>
+      <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+        <Navbar />
+        <div className="container mx-auto px-4 flex">
+          <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} isMobile={isMobile} setIsMobile={setIsMobile} />
+          <main className="flex-1 py-8 px-4 lg:px-8">
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold mb-2 text-center">{location.split('/')[1]?.charAt(0)?.toUpperCase() + location.split('/')[1]?.slice(1)} Components</h1>
+              <p className={`text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                A collection of {location.split('/')[1]?.charAt(0)?.toUpperCase() + location.split('/')[1]?.slice(1)} components with different styles, sizes and states.
+              </p>
+            </div>
+            <Outlet />
+          </main>
         </div>
-    </div>
-       
-        
+        <Footer />
+      </div>
+
     </>
   )
 }

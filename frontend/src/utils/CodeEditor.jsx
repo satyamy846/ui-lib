@@ -1,18 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, CSSProperties } from 'react'
 import useFetchCode from '../hooks/useFetchCode';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark'; // Import the One Dark theme
+import { oneDark, color } from '@codemirror/theme-one-dark'; // Import the One Dark theme
 import { apiEndPoints } from '../constants/Common';
 import CodePreviewToggle from './CodePreviewToggle';
+import { ClipLoader } from "react-spinners";
+import { CheckCircle, CircleCheckBig, ClipboardCopy, Copy } from 'lucide-react';
+import useTheme from '../hooks/useTheme';
+
 
 const CodeEditor = ({ renderPreview, fileName, folderName }) => {
     const editorRef = useRef(null);
     const [activeTab, setActiveTab] = useState('code');
     const { code, loading, error, setCode } = useFetchCode(apiEndPoints.getCode + "?filename=" + fileName + `&foldername=${folderName}`);
-    // const [data, setData] = useState(null);
-    console.log("coode --- ", code)
+    const [copied, setCopied] = useState(false);
+    const {theme, toggleTheme} = useTheme();
 
     useEffect(() => {
         if (editorRef.current) {
@@ -40,22 +44,47 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
             return () => view.destroy();
         }
     }, [code, setCode, activeTab]);
+
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(code).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000); // reset after 1 second
+        });
+      };
+    
     return (
         <>
             {
-                loading ? <div>Loading...</div>
+                loading ? <div className="flex items-center justify-center"><ClipLoader
+                    loading={loading}
+                    size={40}
+                    color='oklch(62.7% 0.265 303.9)'
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+                </div>
                     : (
-                        <div>
-                            <h1>React Code Editor</h1>
+                        <div className={`${activeTab ==='code' ? 'bg-[#282c34]' : 'bg-transparent'} rounded-lg p-2`}>
+                        <div className="w-full flex justify-end mb-2">
+                       {
+                        activeTab === 'code' && (
+                            <button onClick={handleCopy} className={`cursor-pointer text-white hover:text-gray-400 font-bold py-2 px-4 rounded`}>{copied ? <CheckCircle className="text-green-500" /> : <ClipboardCopy />}
+                            </button>
+                        )
+                       }
                             <CodePreviewToggle activeTab={activeTab} setActiveTab={setActiveTab} />
+                        </div>
+                            
                             {
                                 activeTab == 'code' && (
                                     <div
                                         ref={editorRef}
                                         style={{
-                                            border: '1px solid #ddd',
+                                            // border: '1px solid #ddd',
                                             borderRadius: '8px',
-                                            height: '400px', // Set the fixed height to 400px
+                                            // height: '400px', // Set the fixed height to 400px
+                                            maxHeight: '400px',
                                             overflowY: 'auto', // Make the editor scrollable if content exceeds 400px
                                             fontFamily: 'Monaco, monospace', // Ensure a monospaced font for code
                                         }}
@@ -66,7 +95,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                             }
                             {
                                 activeTab == 'preview' && (
-                                    <div className='preview'>
+                                    <div className='preview flex justify-center'>
                                         {renderPreview}
                                     </div>
                                 )
