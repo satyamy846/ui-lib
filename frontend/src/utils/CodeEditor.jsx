@@ -69,7 +69,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                         <div className="w-full flex justify-end mb-2">
                        {
                         activeTab === 'code' && (
-                            <button onClick={handleCopy} className={`cursor-pointer text-white hover:text-gray-400 font-bold py-2 px-4 rounded`}>{copied ? <CheckCircle className="text-green-500" /> : <ClipboardCopy />}
+                            <button onClick={handleCopy} className={`cursor-pointer text-white hover:text-gray-400 font-bold py-1 px-1 rounded`}>{copied ? <CheckCircle className="text-green-500" /> : <ClipboardCopy />}
                             </button>
                         )
                        }
@@ -95,7 +95,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                             }
                             {
                                 activeTab == 'preview' && (
-                                    <div className='preview flex justify-center'>
+                                    <div className='preview flex justify-center items-center bg-[#282c34] w-full h-40 rounded-lg p-2'>
                                         {renderPreview}
                                     </div>
                                 )
