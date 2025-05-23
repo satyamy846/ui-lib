@@ -80,7 +80,7 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile, setIsMobile }) => {
               sidemenus.map((menu) => (
                 <>
                   <div className="flex justify-between items-center mb-6" key={menu.id}>
-                    <div className="text-xl font-bold">{menu.title}</div>
+                    <div className="text-xl font-bold text-purple-500">{menu.title}</div>
                     {/* <button className="p-1" onClick={() => setIsMenuOpen(false)}>
                   ✕
                 </button> */}
@@ -117,7 +117,7 @@ const Sidebar = ({ isOpen, setIsOpen, isMobile, setIsMobile }) => {
           {
             sidemenus.map((menu) => (
               <>
-                <h3 className="text-lg font-semibold mb-4">{menu.title}</h3>
+                <h3 className="text-lg font-semibold mb-4 text-purple-500">{menu.title}</h3>
                 <nav>
                   {
                     menu.subMenu.map((submenu) => (

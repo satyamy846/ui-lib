@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <header className={`sticky top-0 z-10 shadow-md ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
         <div className="flex items-center space-x-2">
           <button
             className="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -24,7 +24,7 @@ const Navbar = () => {
           </button>
           <div className="text-xl font-bold flex items-center">
             <div className={`h-8 w-8 rounded-md mr-2 ${theme === 'dark' ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center`}>
-              <span className="text-white font-bold">UI</span>
+              <span className="text-white font-bold">CS</span>
             </div>
             ComponentStack
           </div>

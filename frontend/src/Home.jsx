@@ -28,7 +28,7 @@ const Home = () => {
     <>
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
         <Navbar />
-        <div className="container mx-auto px-4 flex">
+        <div className="main-container mx-auto px-4 flex max-w-7xl">
           <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} isMobile={isMobile} setIsMobile={setIsMobile} />
           <main className="flex-1 py-8 px-4 lg:px-8">
             <div className="mb-8">

@@ -4,6 +4,7 @@ import Home from '../Home'
 import ButtonPage from '../components/Buttons/ButtonPage'
 import ListPage from '../components/Lists/ListPage'
 import Setup from '../components/Setup/Setup'
+import RadioPage from '../components/Radio/RadioPage'
 
 const AppRoutes = () => {
   return (
@@ -11,6 +12,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />}>
         <Route path="button" element={<ButtonPage />} />
         <Route path="list" element={<ListPage />} />
+        <Route path="radio" element={<RadioPage />} />
         <Route path="setup" element={<Setup />} />
         <Route path="*" element={<h1 className='text-center'>Component Not Present Yet</h1>} />
       </Route>
