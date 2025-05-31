@@ -9,14 +9,16 @@ import CodePreviewToggle from './CodePreviewToggle';
 import { ClipLoader } from "react-spinners";
 import { CheckCircle, CircleCheckBig, ClipboardCopy, Copy } from 'lucide-react';
 import useTheme from '../hooks/useTheme';
+import SkeletonBoxLoader from './SkeletonBoxLoader';
+import CardSkeleton from './CardSkeleton';
 
 
 const CodeEditor = ({ renderPreview, fileName, folderName }) => {
     const editorRef = useRef(null);
-    const [activeTab, setActiveTab] = useState('code');
+    const [activeTab, setActiveTab] = useState('preview');
     const { code, loading, error, setCode } = useFetchCode(apiEndPoints.getCode + "?filename=" + fileName + `&foldername=${folderName}`);
     const [copied, setCopied] = useState(false);
-    const {theme, toggleTheme} = useTheme();
+    const {theme} = useTheme();
 
     useEffect(() => {
         if (editorRef.current) {
@@ -27,6 +29,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                 extensions: [
                     javascript(),
                     oneDark,
+                    EditorView.editable.of(false), // Make the editor non-editable
                     EditorView.updateListener.of((update) => {
                         if (update.docChanged) {
                             setCode(update.state.doc.toString());
@@ -56,7 +59,10 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
     return (
         <>
             {
-                loading ? <div className="flex items-center justify-center"><ClipLoader
+                loading ? 
+               
+              
+        <div className="flex items-center justify-center"><ClipLoader
                     loading={loading}
                     size={40}
                     color='oklch(62.7% 0.265 303.9)'
@@ -64,6 +70,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                     data-testid="loader"
                 />
                 </div>
+
                     : (
                         <div className={`${activeTab ==='code' ? 'bg-[#282c34]' : 'bg-transparent'} rounded-lg p-2`}>
                         <div className="w-full flex justify-end mb-2">
@@ -95,7 +102,7 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
                             }
                             {
                                 activeTab == 'preview' && (
-                                    <div className='preview flex justify-center items-center bg-[#282c34] w-full h-40 rounded-lg p-2'>
+                                    <div className={`preview flex justify-center items-center ${theme === 'dark' ? 'bg-[#282c34]': 'bg-gray-200' }  w-full rounded-lg p-2`}>
                                         {renderPreview}
                                     </div>
                                 )
@@ -109,3 +116,13 @@ const CodeEditor = ({ renderPreview, fileName, folderName }) => {
 }
 
 export default CodeEditor
+
+ {/* <div className="flex items-center justify-center">
+                    <ClipLoader
+                        loading={loading}
+                        size={40}
+                        color='oklch(62.7% 0.265 303.9)'
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div> */}

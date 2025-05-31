@@ -1,28 +1,57 @@
-import { useState } from "react";
-import ParentViewEditor from "../../utils/ParentViewEditor"
+import ParentViewEditor from "../../utils/ParentViewEditor";
 import BasicRadio from "./BasicRadio";
+import ColoredRadio from "./ColoredRadio";
+import CardRadio from "./CardRadio";
+import ButtonRadio from "./ButtonRadio";
+import CustomRadio from "./CustomRadio";
+import SizedRadio from "./SizedRadio";
 
-const RadioPage = () =>{
-    const [selectedBasic, setSelectedBasic] = useState('option1');
+const RadioPage = () => {
     return (
         <>
+            {/* Basic Radio */}
             <ParentViewEditor 
-                renderPreview={
-                    <BasicRadio
-                    name="basic" 
-                    value="option1" 
-                    checked={selectedBasic === 'option1'} 
-                    onChange={(e) => setSelectedBasic(e.target.value)} 
-                    label="Option One" 
-                    />}  
-             
-             fileName="BasicRadio" 
-             folderName="Radio"
+                renderPreview={<BasicRadio />}  
+                fileName="BasicRadio" 
+                folderName="Radio"
+            />
 
-             />
-        {/* <ParentViewEditor renderPreview={<List2 />}  fileName="List2" folderName="Lists"/> */}
+            {/* Colored Radio */}
+            {/* <ParentViewEditor 
+                renderPreview={<ColoredRadio />}  
+                fileName="ColoredRadio" 
+                folderName="Radio"
+            /> */}
+
+            {/* Sized Radio */}
+            <ParentViewEditor 
+                renderPreview={<SizedRadio />}  
+                fileName="SizedRadio" 
+                folderName="Radio"
+            />
+
+            {/* Card Radio */}
+            <ParentViewEditor 
+                renderPreview={<CardRadio />}  
+                fileName="CardRadio" 
+                folderName="Radio"
+            />
+
+            {/* Button Radio */}
+            <ParentViewEditor 
+                renderPreview={<ButtonRadio />}  
+                fileName="ButtonRadio" 
+                folderName="Radio"
+            />
+
+            {/* Custom Radio */}
+            <ParentViewEditor 
+                renderPreview={<CustomRadio />}  
+                fileName="CustomRadio" 
+                folderName="Radio"
+            />
         </>
-    )
-}
+    );
+};
 
 export default RadioPage;
