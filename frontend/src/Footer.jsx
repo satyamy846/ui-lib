@@ -5,12 +5,12 @@ const Footer = () => {
     const {theme, toogleTheme} = useTheme();
     return (
         <footer className={`mt-12 border-t ${theme === 'dark' ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'} py-8`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <div className="text-xl font-bold flex items-center">
                 <div className={`h-8 w-8 rounded-md mr-2 ${theme === 'dark' ? 'bg-purple-600' : 'bg-purple-500'} flex items-center justify-center`}>
-                  <span className="text-white font-bold">UI</span>
+                  <span className="text-white font-bold">CS</span>
                 </div>
                 ComponentStack
               </div>
